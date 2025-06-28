@@ -15,6 +15,7 @@ import DeliveryPartnerRegistration from "./pages/registration/DeliveryPartnerReg
 import RegistrationSuccess from "./pages/registration/RegistrationSuccess"
 import RegistrationReview from "./pages/registration/RegistrationReview"
 import "./App.css"
+import DevHelper from "./components/DevHelper"
 
 function App() {
   const [user, setUser] = useState(null)
@@ -27,7 +28,6 @@ function App() {
   })
 
   return (
-    
     <Router>
       <div className="App">
         <Routes>
@@ -135,6 +135,7 @@ function App() {
 
           <Route path="/" element={<Navigate to="/login" />} />
         </Routes>
+        <DevHelper />
       </div>
     </Router>
   )

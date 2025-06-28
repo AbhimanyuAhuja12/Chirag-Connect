@@ -49,7 +49,7 @@ const OTPVerification = ({ authFlow, setAuthFlow, setUser }) => {
     setLoading(true)
 
     try {
-      const response = await fetch("/api/auth/verify-otp", {
+      const response = await fetch("http://localhost:5000/api/auth/verify-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const OTPVerification = ({ authFlow, setAuthFlow, setUser }) => {
     setError("")
 
     try {
-      const response = await fetch("/api/auth/send-otp", {
+      const response = await fetch("http://localhost:5000/api/auth/send-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -131,7 +131,16 @@ const OTPVerification = ({ authFlow, setAuthFlow, setUser }) => {
               <p className="text-sm text-gray-600 mb-2">
                 We sent a verification code to your mobile. Enter the code from the mobile in the field below.
               </p>
-              <p className="text-sm text-gray-500 mb-6">******{authFlow.mobile.slice(-4)}</p>
+              <p className="text-sm text-gray-500 mb-2">******{authFlow.mobile.slice(-4)}</p>
+
+              {/* Development Mode Hint */}
+              <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3 mb-4">
+                <p className="text-sm text-yellow-800">
+                  <strong>Development Mode:</strong> Use OTP <strong>1234</strong> to continue
+                </p>
+                {authFlow.devOtp && <p className="text-xs text-yellow-600 mt-1">Generated OTP: {authFlow.devOtp}</p>}
+              </div>
+
               <p className="text-sm text-gray-700 mb-6">Type your 4 digit security code</p>
 
               <form onSubmit={handleSubmit} className="space-y-6">

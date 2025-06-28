@@ -43,7 +43,7 @@ const Signup = ({ authFlow, setAuthFlow }) => {
     setLoading(true)
 
     try {
-      const response = await fetch("/api/auth/send-otp", {
+      const response = await fetch("http://localhost:5000/api/auth/send-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +65,15 @@ const Signup = ({ authFlow, setAuthFlow }) => {
           email: formData.email,
           name: formData.name,
           step: "otp",
+          // Store OTP for development mode
+          ...(data.otp && { devOtp: data.otp }),
         })
+
+        // Show OTP in alert for development
+        if (data.otp) {
+          alert(`Development Mode: Your OTP is ${data.otp}`)
+        }
+
         navigate("/verify-otp")
       } else {
         setError(data.message || "Failed to send OTP")
